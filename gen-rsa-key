@@ -1,0 +1,7 @@
+# For the later token exchange we first generate a JWT token keystore
+
+keytool -genkeypair -alias jwt -keyalg RSA -dname "CN=jwt, L=New-York, S=New-York, C=US" -keypass yourSuperSecretKey -keystore jwt.jks -storepass yourSuperSecretKey
+
+# Generate the public key for out keystore
+
+keytool -list -rfc --keystore jwt.jks | openssl x509 -inform pem -pubkey

@@ -1,0 +1,6 @@
+version: "3.0"
+
+services:
+  spring-boot-service:
+    build: .
+    image: your-docker-repo/spring-boot-auth-service

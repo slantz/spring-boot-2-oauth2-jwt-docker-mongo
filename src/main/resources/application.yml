@@ -1,0 +1,12 @@
+server:
+  port: 9999
+
+spring:
+  data:
+    mongodb:
+      port: 27017
+      database: auth
+
+management:
+  server:
+    port: 8081
