@@ -3,8 +3,6 @@ package com.yourproject.auth.controller;
 import com.yourproject.auth.constant.AuthorizationGrant;
 import com.yourproject.auth.model.mongo.User;
 import com.yourproject.auth.service.UserServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +25,6 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {
-    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserServiceImpl userService;
@@ -40,7 +37,7 @@ public class UserController {
 
     @GetMapping(path = "/{userId}")
     @PreAuthorize(AuthorizationGrant.AUTHORITY_ADMIN)
-    public ResponseEntity<User> getUser(Principal principal, @PathVariable String userId) {
+    public ResponseEntity<User> getUser(@PathVariable String userId) {
         return new ResponseEntity<>(this.userService.getById(userId), HttpStatus.OK);
     }
 

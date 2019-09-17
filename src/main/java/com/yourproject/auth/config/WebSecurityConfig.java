@@ -1,8 +1,6 @@
 package com.yourproject.auth.config;
 
 import com.yourproject.auth.service.UserServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -25,8 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private static final Logger LOG = LoggerFactory.getLogger(WebSecurityConfig.class);
 
     @Autowired
     private UserServiceImpl userService;

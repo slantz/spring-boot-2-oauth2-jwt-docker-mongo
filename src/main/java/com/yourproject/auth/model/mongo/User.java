@@ -1,8 +1,6 @@
 package com.yourproject.auth.model.mongo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,8 +19,6 @@ import java.util.function.Function;
 
 @Document
 public class User implements UserDetails {
-
-    private static final Logger LOG = LoggerFactory.getLogger(User.class);
 
     @Id
     @JsonIgnore
