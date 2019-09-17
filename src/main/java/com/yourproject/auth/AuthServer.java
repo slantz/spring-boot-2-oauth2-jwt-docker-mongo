@@ -2,7 +2,6 @@ package com.yourproject.auth;
 
 import com.yourproject.auth.model.mongo.User;
 import com.yourproject.auth.service.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +13,6 @@ import java.util.Arrays;
 
 @SpringBootApplication
 public class AuthServer implements CommandLineRunner {
-
-    @Autowired
-    private UserServiceImpl userService;
 
     @Bean
     CommandLineRunner init(UserServiceImpl userService) {
