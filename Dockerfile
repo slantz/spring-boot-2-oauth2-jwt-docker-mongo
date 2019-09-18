@@ -1,5 +1,8 @@
 FROM openjdk:10.0.1-10-jdk-slim-sid
 
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+	&& rm -rf /var/lib/apt/lists/*
+
 ARG JAR_FILE
 
 COPY ${JAR_FILE} /opt/workspace/app.jar

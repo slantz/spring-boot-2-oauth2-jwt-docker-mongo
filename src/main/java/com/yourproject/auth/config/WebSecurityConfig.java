@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 @EnableWebSecurity
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -47,8 +50,8 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.OPTIONS, "/oauth/check_token", "/oauth/token").permitAll() // this line is necessary to satisfy CORS for web fetch
-                    .requestMatchers(EndpointRequest.to("status", "info", "health")).permitAll()
-                    .antMatchers("/**").authenticated()
+                    .requestMatchers(EndpointRequest.to("info", "health")).permitAll()
+                    .anyRequest().authenticated()
                 .and()
                 .httpBasic()
                 .and()
