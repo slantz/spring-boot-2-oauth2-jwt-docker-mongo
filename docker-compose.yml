@@ -5,7 +5,7 @@ services:
     build:
       context: .
       args:
-        JAR_FILE: ./build/libs/spring-boot-auth-service-1.0.0.jar
+        JAR_FILE: ./build/libs/spring-boot-auth-service-1.1.0.jar
     image: your-docker-repo/spring-boot-auth-service
     ports:
       - 9999:9999
