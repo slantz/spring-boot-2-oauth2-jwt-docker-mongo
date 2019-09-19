@@ -140,6 +140,24 @@ here the `authority: ADMIN` is returned then on any Authorization service or res
 
 ## Dockerize all the things
 
+### Use docker-compose to build a service image and run with mongo
+
+#### Docker network create only once
+
+```
+docker network create spring_boot_2_oauth2_default_network
+```
+
+#### Start
+```
+docker-compose up -d
+```
+
+#### Stop
+```
+docker-compose down -v
+```
+
 ### Each authorization service in it's own image _WITHOUT_ common network
 
 ```

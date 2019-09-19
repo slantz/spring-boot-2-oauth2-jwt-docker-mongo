@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 @EnableWebSecurity
-@Order(Ordered.HIGHEST_PRECEDENCE + 1)
+@Order(2)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
