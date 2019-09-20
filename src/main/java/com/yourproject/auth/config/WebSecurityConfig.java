@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 @EnableWebSecurity
-@Order(2)
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -41,6 +41,13 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) {
+        web
+            .ignoring()
+            .antMatchers("/actuator/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
@@ -49,7 +56,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.OPTIONS, "/oauth/check_token", "/oauth/token").permitAll() // this line is necessary to satisfy CORS for web fetch
-                    .requestMatchers(EndpointRequest.to("info", "health")).permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .httpBasic()

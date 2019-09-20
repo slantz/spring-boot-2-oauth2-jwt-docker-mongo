@@ -35,7 +35,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Bean
-    public WebResponseExceptionTranslator loggingExceptionTranslator() {
+    public WebResponseExceptionTranslator<OAuth2Exception> loggingExceptionTranslator() {
         return new DefaultWebResponseExceptionTranslator() {
             @Override
             public ResponseEntity<OAuth2Exception> translate(Exception e) throws Exception {

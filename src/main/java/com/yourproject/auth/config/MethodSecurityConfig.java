@@ -19,7 +19,7 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
  * As well as {@link @EnableWebSecurity} should go together somewhere in application to filter the requests.
  */
 @Configuration
-@EnableResourceServer
+@EnableResourceServer // creates WebSecurityConfigurerAdapter with Order(3)
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
