@@ -1,5 +1,7 @@
 package com.yourproject.auth.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,8 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OAuth2Configuration.class);
+
     @Autowired
     @Qualifier("yourProjectAuthenticationManager")
     private AuthenticationManager authenticationManager;
@@ -39,8 +43,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         return new DefaultWebResponseExceptionTranslator() {
             @Override
             public ResponseEntity<OAuth2Exception> translate(Exception e) throws Exception {
-                // This is the line that prints the stack trace to the log. You can customise this to format the trace etc if you like
-                e.printStackTrace();
+                LOG.info(e.getMessage());
 
                 // Carry on handling the exception
                 ResponseEntity<OAuth2Exception> responseEntity = super.translate(e);
