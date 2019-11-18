@@ -1,6 +1,7 @@
 package com.yourproject.auth.service;
 
 import com.yourproject.auth.model.mongo.User;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public interface UserService {
     User getById(String id);
 
     User getByUsername(String username);
+
+    List<GrantedAuthority> getAuthoritiesByUsername(String username);
 
     User signUp(User user);
 

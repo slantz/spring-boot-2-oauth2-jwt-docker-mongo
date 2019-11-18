@@ -6,6 +6,7 @@ import com.yourproject.auth.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,6 +45,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public User getByUsername(String username) {
         return this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user not found by id:" + username));
+    }
+
+    @Override
+    public List<GrantedAuthority> getAuthoritiesByUsername(String username) {
+        User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user not found by id:" + username));
+        return List.copyOf(user.getAuthorities());
     }
 
     @Override

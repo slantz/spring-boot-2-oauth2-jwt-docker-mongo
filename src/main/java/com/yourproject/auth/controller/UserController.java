@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,12 @@ public class UserController {
     @PreAuthorize(AuthorizationGrant.SCOPE_RESOURCE_SERVICE + " or " + AuthorizationGrant.AUTHORITY_ADMIN)
     public ResponseEntity<User> getByUserName(@PathVariable String username) {
         return new ResponseEntity<>(this.userService.getByUsername(username), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/username/{username}/authorities")
+    @PreAuthorize(AuthorizationGrant.SCOPE_RESOURCE_SERVICE + " or " + AuthorizationGrant.AUTHORITY_ADMIN)
+    public ResponseEntity<List<GrantedAuthority>> getAuthoritiesByUsername(@PathVariable String username) {
+        return new ResponseEntity<>(this.userService.getAuthoritiesByUsername(username), HttpStatus.OK);
     }
 
     @PostMapping(path = "/sign-up")
